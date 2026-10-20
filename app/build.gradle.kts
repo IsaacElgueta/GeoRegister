@@ -2,6 +2,7 @@ import java.util.Properties
 
 plugins {
     alias(libs.plugins.android.application)
+    id("com.google.gms.google-services")
 }
 
 // Lee la clave
@@ -11,7 +12,6 @@ if (localPropertiesFile.exists()) {
     localPropertiesFile.inputStream().use { localProperties.load(it) }
 }
 val mapsApiKey = localProperties.getProperty("MAPS_API_KEY") ?: ""
-
 
 android {
     namespace = "com.lira.georegister"
@@ -28,7 +28,6 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
-        // Inyecta la clave en el Manifest
         manifestPlaceholders["MAPS_API_KEY"] = mapsApiKey
     }
 
@@ -53,6 +52,11 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.espresso.core)
     androidTestImplementation(libs.ext.junit)
-    //dependecia de google
+
+    // Dependencia de Google Maps
     implementation("com.google.android.gms:play-services-maps:18.2.0")
+
+    // Dependencias de Firebase
+    implementation(platform("com.google.firebase:firebase-bom:35.0.2"))
+    implementation("com.google.firebase:firebase-analytics")
 }
