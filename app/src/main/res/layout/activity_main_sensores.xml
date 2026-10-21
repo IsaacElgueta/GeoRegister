@@ -7,4 +7,152 @@
     android:layout_height="match_parent"
     tools:context=".Main_Sensores">
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout5"
+        android:layout_width="409dp"
+        android:layout_height="88dp"
+        app:layout_constraintBottom_toTopOf="@+id/constraintLayout4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.5">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar3"
+            android:layout_width="407dp"
+            android:layout_height="86dp"
+            android:background="?attr/colorPrimary"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="?attr/actionBarTheme"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.5" />
+
+        <TextView
+            android:id="@+id/textView12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="73dp"
+            android:layout_marginBottom="4dp"
+            android:text="Sensores de movimiento"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="@+id/imageButton2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/imageButton2" />
+
+        <ImageButton
+            android:id="@+id/imageButton2"
+            android:layout_width="0dp"
+            android:layout_height="41dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="11dp"
+            android:background="#00FFFFFF"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/textView12"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="?attr/homeAsUpIndicator" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout4"
+        android:layout_width="409dp"
+        android:layout_height="640dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout5"
+        app:layout_constraintVertical_bias="0.5">
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="44dp"
+            android:layout_marginTop="36dp"
+            android:layout_marginEnd="44dp"
+            android:layout_marginBottom="38dp"
+            android:text="Mueve o agita el telefono. Se muestran los valores del acelerometro (m/s²) y se detectan movimienots bruscos."
+            android:textSize="16sp"
+            app:layout_constraintBottom_toTopOf="@+id/textViewX"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textViewX"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="44dp"
+            android:layout_marginBottom="11dp"
+            android:text="X: 0.0"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toTopOf="@+id/textViewY"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+        <TextView
+            android:id="@+id/textViewY"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:text="Y: 0.0"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toTopOf="@+id/textViewZ"
+            app:layout_constraintEnd_toEndOf="@+id/textViewX"
+            app:layout_constraintTop_toBottomOf="@+id/textViewX" />
+
+        <TextView
+            android:id="@+id/textViewZ"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="35dp"
+            android:text="Z: 0.0"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toTopOf="@+id/textViewMagnitud"
+            app:layout_constraintStart_toStartOf="@+id/textViewY"
+            app:layout_constraintTop_toBottomOf="@+id/textViewY" />
+
+        <TextView
+            android:id="@+id/textViewEstado"
+            android:layout_width="235dp"
+            android:layout_height="0dp"
+            android:layout_marginBottom="26dp"
+            android:background="#66BB6A"
+            android:gravity="center"
+            android:text="Reposo"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toTopOf="@+id/textViewContador"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewMagnitud" />
+
+        <TextView
+            android:id="@+id/textViewMagnitud"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="47dp"
+            android:layout_marginBottom="13dp"
+            android:text="Magnitud Total : 9.81 m/s²"
+            app:layout_constraintBottom_toTopOf="@+id/textViewEstado"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewZ" />
+
+        <TextView
+            android:id="@+id/textViewContador"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="47dp"
+            android:layout_marginBottom="177dp"
+            android:text="Movimientos detectados : 0"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewEstado" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,11 +1,15 @@
 package com.lira.georegister;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.widget.Button;
+import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.widget.EditText;
 import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -18,6 +22,8 @@ import com.google.android.gms.location.LocationServices;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
+import java.util.Calendar;
+import java.util.Locale;
 import java.util.Map;
 
 public class Main_RegistrarIncidencia extends AppCompatActivity {
@@ -26,6 +32,7 @@ public class Main_RegistrarIncidencia extends AppCompatActivity {
     EditText etTitulo, etDescripcion, etFechaHora, etLatitud, etLongitud;
     Spinner spinnerCategoria;
     Button btnObtenerUbicacion, btnGuardar;
+    ImageButton btnVolver;
 
     // Variables para GPS y Base de datos
     FusedLocationProviderClient fusedLocationClient;
@@ -45,6 +52,7 @@ public class Main_RegistrarIncidencia extends AppCompatActivity {
         spinnerCategoria = findViewById(R.id.spinnerCategoria);
         btnObtenerUbicacion = findViewById(R.id.btnObtenerUbicacion);
         btnGuardar = findViewById(R.id.btnGuardar);
+        btnVolver = findViewById(R.id.imageButton);
 
         ArrayAdapter<CharSequence> categoriasAdapter = ArrayAdapter.createFromResource(
                 this,
@@ -67,6 +75,46 @@ public class Main_RegistrarIncidencia extends AppCompatActivity {
         btnGuardar.setOnClickListener(v -> {
             guardarIncidencia();
         });
+
+        btnVolver.setOnClickListener(v -> finish());
+        etFechaHora.setOnClickListener(v -> seleccionarFechaHora());
+        etFechaHora.setOnFocusChangeListener((v, tieneFoco) -> {
+            if (tieneFoco) {
+                seleccionarFechaHora();
+            }
+        });
+    }
+
+    private void seleccionarFechaHora() {
+        Calendar ahora = Calendar.getInstance();
+        DatePickerDialog selectorFecha = new DatePickerDialog(
+                this,
+                (vista, anio, mes, dia) -> {
+                    TimePickerDialog selectorHora = new TimePickerDialog(
+                            this,
+                            (vistaHora, hora, minuto) -> {
+                                String fechaHora = String.format(
+                                        Locale.getDefault(),
+                                        "%02d/%02d/%04d %02d:%02d",
+                                        dia,
+                                        mes + 1,
+                                        anio,
+                                        hora,
+                                        minuto
+                                );
+                                etFechaHora.setText(fechaHora);
+                            },
+                            ahora.get(Calendar.HOUR_OF_DAY),
+                            ahora.get(Calendar.MINUTE),
+                            true
+                    );
+                    selectorHora.show();
+                },
+                ahora.get(Calendar.YEAR),
+                ahora.get(Calendar.MONTH),
+                ahora.get(Calendar.DAY_OF_MONTH)
+        );
+        selectorFecha.show();
     }
 
     // --- FUNCIÓN PARA PEDIR Y OBTENER LA UBICACIÓN ---
@@ -104,7 +152,8 @@ public class Main_RegistrarIncidencia extends AppCompatActivity {
         String longitud = etLongitud.getText().toString().trim();
 
         // Validar que los campos no estén vacíos
-        if (titulo.isEmpty() || descripcion.isEmpty() || latitud.isEmpty() || longitud.isEmpty()) {
+        if (titulo.isEmpty() || descripcion.isEmpty() || fechaHora.isEmpty()
+                || latitud.isEmpty() || longitud.isEmpty()) {
             Toast.makeText(this, "Por favor, completa los campos obligatorios", Toast.LENGTH_SHORT).show();
             return; // Detiene la función aquí
         }
@@ -132,7 +181,10 @@ public class Main_RegistrarIncidencia extends AppCompatActivity {
         db.collection("incidencias").add(incidencia)
                 .addOnSuccessListener(documentReference -> {
                     Toast.makeText(this, "¡Incidencia guardada exitosamente!", Toast.LENGTH_SHORT).show();
-                    finish(); // Cierra la pantalla y vuelve al menú
+                    Intent intent = new Intent(this, MainActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                    startActivity(intent);
+                    finish();
                 })
                 .addOnFailureListener(e -> {
                     Toast.makeText(this, "Error al guardar: " + e.getMessage(), Toast.LENGTH_LONG).show();
