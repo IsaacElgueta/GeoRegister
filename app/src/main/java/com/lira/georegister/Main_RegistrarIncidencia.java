@@ -141,6 +141,8 @@ public class Main_RegistrarIncidencia extends AppCompatActivity {
 
     // --- FUNCIÓN PARA GUARDAR EN FIREBASE ---
     private void guardarIncidencia() {
+        btnGuardar.setEnabled(false);
+
         // Obtener lo que escribió el usuario
         String titulo = etTitulo.getText().toString().trim();
         String descripcion = etDescripcion.getText().toString().trim();
@@ -155,6 +157,7 @@ public class Main_RegistrarIncidencia extends AppCompatActivity {
         if (titulo.isEmpty() || descripcion.isEmpty() || fechaHora.isEmpty()
                 || latitud.isEmpty() || longitud.isEmpty()) {
             Toast.makeText(this, "Por favor, completa los campos obligatorios", Toast.LENGTH_SHORT).show();
+            btnGuardar.setEnabled(true);
             return; // Detiene la función aquí
         }
 
@@ -165,6 +168,7 @@ public class Main_RegistrarIncidencia extends AppCompatActivity {
             longitudNumero = Double.parseDouble(longitud);
         } catch (NumberFormatException e) {
             Toast.makeText(this, "Latitud y longitud deben ser números válidos", Toast.LENGTH_SHORT).show();
+            btnGuardar.setEnabled(true);
             return;
         }
 
@@ -187,6 +191,7 @@ public class Main_RegistrarIncidencia extends AppCompatActivity {
                     finish();
                 })
                 .addOnFailureListener(e -> {
+                    btnGuardar.setEnabled(true);
                     Toast.makeText(this, "Error al guardar: " + e.getMessage(), Toast.LENGTH_LONG).show();
                 });
     }

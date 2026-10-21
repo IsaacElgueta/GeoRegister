@@ -10,4 +10,11 @@
     <string name="guardar_incidencia">Guardar</string>
     <string name="nueva_incidencia">Nueva incidencia</string>
     <string name="volver">Volver</string>
+    <string name="historial_vacio">No hay incidencias registradas.</string>
+    <string name="historial_error">No se pudo cargar el historial: %1$s</string>
+    <string name="historial_categoria">Categoría: %1$s</string>
+    <string name="historial_fecha">Fecha: %1$s</string>
+    <string name="historial_ubicacion">Ubicación: %1$s</string>
+    <string name="historial_fecha_defecto">Fecha: Sin fecha</string>
+    <string name="historial_ubicacion_defecto">Ubicación: Sin ubicación</string>
 </resources>
