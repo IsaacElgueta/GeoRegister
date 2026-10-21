@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">GeoRegister</string>
+    <string name="incidencia_titulo">Título</string>
+    <string name="incidencia_descripcion">Descripción</string>
+    <string name="incidencia_categoria">Categoría</string>
+    <string name="incidencia_fecha_hora">Fecha y hora</string>
+    <string name="incidencia_latitud">Latitud</string>
+    <string name="incidencia_longitud">Longitud</string>
+    <string name="obtener_ubicacion">Obtener ubicación</string>
+    <string name="guardar_incidencia">Guardar</string>
+    <string name="nueva_incidencia">Nueva incidencia</string>
+    <string name="volver">Volver</string>
 </resources>
